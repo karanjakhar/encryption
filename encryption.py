@@ -2,7 +2,7 @@ from cryptography.fernet import Fernet
 import csv
 
 def put_in_file(organisation,username,password):
-    with open('detail.csv','w',newline='') as csvfile:
+    with open('detail.csv','a',newline='') as csvfile:
         fieldnames=['username','password','organisation']
         writer=csv.DictWriter(csvfile,fieldnames=fieldnames)
         writer.writeheader()
@@ -23,9 +23,12 @@ def encrypt(organisation,username,password,key):
     put_in_file(encoded_organisation.decode('ASCII'),encoded_username.decode('ASCII'),encoded_password.decode('ASCII'))
 
 def decrypt(data,key):
-    f=Fernet(key)
-    pk=bytes(data,'utf-8')
-    pk=f.decrypt(pk)
+    try:
+
+    	f=Fernet(key)
+    	pk=bytes(data,'utf-8')
+    	pk=f.decrypt(pk)
+    except: return None
     return pk.decode('ASCII')
 
 

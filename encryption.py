@@ -46,7 +46,7 @@ def show_file(organisation,key):
        for row in reader:
            
            if organisation == decrypt(row['organisation'],key): 
-               print('Organisation:',decrypt(row['organisation'],key),'Username:',decrypt(row['username'],key),'Password:',decrypt(row['password'],key))
+               print(f"Organisation:{decrypt(row['organisation'],key)}Username:{decrypt(row['username'],key)}Password:{decrypt(row['password'],key)}")
                return
        print('Not found')
 
@@ -61,7 +61,7 @@ if option == "1":
     key=Fernet.generate_key()
     get_data(key)
     print("Its done")
-    print("Your Key is :",key.decode('ASCII'),"  Don't Share it." )
+    print(f"Your Key is :{key.decode('ASCII')}  Don't Share it." )
 else:
     key=input("Enter your key:")
     regain(key.encode('ASCII'))
